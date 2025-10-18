@@ -11,3 +11,16 @@ jobs:
 		steps:
 			- script: echo "Pipeline triggered by GitHub push."
 				displayName: 'Echo step'
+
+trigger:
+	- main
+
+pool:
+	name: Default
+
+jobs:
+	- job: echo_job
+		displayName: 'Echo Job'
+		steps:
+			- script: echo "Pipeline triggered by GitHub push."
+				displayName: 'Echo step'
