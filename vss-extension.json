@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "estimate-extension",
   "name": "Estimate Extension",
-  "publisher": "your-publisher-id",
+  "publisher": "EST-Mate",
   "version": "1.0.0",
   "description": "An extension to add a custom tab in Azure DevOps.",
   "targets": [
