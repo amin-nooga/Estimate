@@ -1,0 +1,60 @@
+# Azure DevOps Pipeline for dev, test, and prod environments
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: Dev
+    displayName: 'Deploy to Dev'
+    jobs:
+      - job: BuildAndDeployDev
+        displayName: 'Build and Deploy to Dev'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+          - script: npm install
+            displayName: 'Install dependencies'
+          - script: npm run build
+            displayName: 'Build project'
+          - script: echo 'Deploy to Dev environment here'
+            displayName: 'Deploy to Dev'
+
+  - stage: Test
+    displayName: 'Deploy to Test'
+    dependsOn: Dev
+    jobs:
+      - job: BuildAndDeployTest
+        displayName: 'Build and Deploy to Test'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+          - script: npm install
+            displayName: 'Install dependencies'
+          - script: npm run build
+            displayName: 'Build project'
+          - script: echo 'Deploy to Test environment here'
+            displayName: 'Deploy to Test'
+
+  - stage: Prod
+    displayName: 'Deploy to Prod'
+    dependsOn: Test
+    jobs:
+      - job: BuildAndDeployProd
+        displayName: 'Build and Deploy to Prod'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+          - script: npm install
+            displayName: 'Install dependencies'
+          - script: npm run build
+            displayName: 'Build project'
+          - script: echo 'Deploy to Prod environment here'
+            displayName: 'Deploy to Prod'

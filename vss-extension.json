@@ -1,0 +1,36 @@
+{
+  "manifestVersion": 1,
+  "id": "estimate-extension",
+  "name": "Estimate Extension",
+  "publisher": "your-publisher-id",
+  "version": "1.0.0",
+  "description": "An extension to add a custom tab in Azure DevOps.",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services.Cloud"
+    }
+  ],
+  "icons": {
+    "default": "public/favicon.ico"
+  },
+  "contributions": [
+    {
+      "id": "estimate-tab",
+      "type": "ms.vss-web.hub",
+      "targets": [
+        "ms.vss-code-web.code-hub-group"
+      ],
+      "properties": {
+        "name": "Estimate Tab",
+        "uri": "public/index.html",
+        "order": 100
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "public",
+      "addressable": true
+    }
+  ]
+}
