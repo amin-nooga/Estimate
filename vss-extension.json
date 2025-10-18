@@ -32,5 +32,8 @@
       "path": "public",
       "addressable": true
     }
+  ],
+  "categories": [
+    "Azure Repos"
   ]
 }

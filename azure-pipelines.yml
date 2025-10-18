@@ -1,77 +1,10 @@
 # Azure DevOps Pipeline for dev, test, and prod environments
-trigger:
-  - main
-
 pool:
-  name: Default
-
 stages:
-  - stage: Dev
-    displayName: 'Deploy to Dev'
-    jobs:
-      - job: BuildAndDeployDev
-        displayName: 'Build and Deploy to Dev'
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '18.x'
-            displayName: 'Install Node.js'
-          - script: npm install
-            displayName: 'Install dependencies'
-          - script: npm run build
-            displayName: 'Build project'
-          - script: echo 'Deploy to Dev environment here'
-            displayName: 'Deploy to Dev'
 
-  - stage: Test
-    displayName: 'Deploy to Test'
-    dependsOn: Dev
-    jobs:
-      - job: BuildAndDeployTest
-        displayName: 'Build and Deploy to Test'
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '18.x'
-            displayName: 'Install Node.js'
-          - script: npm install
-            displayName: 'Install dependencies'
-          - script: npm run build
-            displayName: 'Build project'
-          - script: echo 'Deploy to Test environment here'
-            displayName: 'Deploy to Test'
-
-  - stage: Prod
-    displayName: 'Deploy to Prod'
-    dependsOn: Test
-    jobs:
-      - job: BuildAndDeployProd
-        displayName: 'Build and Deploy to Prod'
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '18.x'
-            displayName: 'Install Node.js'
-          - script: npm install
-            displayName: 'Install dependencies'
-          - script: npm run build
-            displayName: 'Build project'
-          - script: echo 'Deploy to Prod environment here'
-            displayName: 'Deploy to Prod'
-
-  - stage: PackageAndPublishExtension
-    displayName: 'Package and Publish Azure DevOps Extension'
-    dependsOn: Prod
-    jobs:
-      - job: PackageAndPublish
-        displayName: 'Package and Publish Extension'
-        steps:
-          - script: npm install -g tfx-cli
-            displayName: 'Install tfx-cli'
-          - script: tfx extension create --manifest-globs vss-extension.json
-            displayName: 'Package Azure DevOps Extension'
-          # Uncomment the following step to publish the extension automatically
-          #- script: tfx extension publish --manifest-globs vss-extension.json --token $(SYSTEM_ACCESSTOKEN)
-          #  displayName: 'Publish Azure DevOps Extension'
-          #  env:
-          #    SYSTEM_ACCESSTOKEN: $(SYSTEM_ACCESSTOKEN)
+# All build and deployment steps have been removed.
+# Use the following commands locally to package and publish your extension:
+#
+# npm install -g tfx-cli
+# tfx extension create --manifest-globs vss-extension.json
+# tfx extension publish --manifest-globs vss-extension.json --token <YOUR_PERSONAL_ACCESS_TOKEN>
