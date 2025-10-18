@@ -2,9 +2,16 @@
 pool:
 stages:
 
-# All build and deployment steps have been removed.
-# Use the following commands locally to package and publish your extension:
-#
-# npm install -g tfx-cli
-# tfx extension create --manifest-globs vss-extension.json
-# tfx extension publish --manifest-globs vss-extension.json --token <YOUR_PERSONAL_ACCESS_TOKEN>
+
+trigger:
+	- main
+
+pool:
+	name: Default
+
+jobs:
+	- job: echo_job
+		displayName: 'Echo Job'
+		steps:
+			- script: echo "Pipeline triggered by GitHub push."
+				displayName: 'Echo step'
