@@ -1,7 +1,3 @@
-# Azure DevOps Pipeline for dev, test, and prod environments
-pool:
-stages:
-
 
 trigger:
 	- main
