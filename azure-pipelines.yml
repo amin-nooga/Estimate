@@ -58,3 +58,20 @@ stages:
             displayName: 'Build project'
           - script: echo 'Deploy to Prod environment here'
             displayName: 'Deploy to Prod'
+
+  - stage: PackageAndPublishExtension
+    displayName: 'Package and Publish Azure DevOps Extension'
+    dependsOn: Prod
+    jobs:
+      - job: PackageAndPublish
+        displayName: 'Package and Publish Extension'
+        steps:
+          - script: npm install -g tfx-cli
+            displayName: 'Install tfx-cli'
+          - script: tfx extension create --manifest-globs vss-extension.json
+            displayName: 'Package Azure DevOps Extension'
+          # Uncomment the following step to publish the extension automatically
+          #- script: tfx extension publish --manifest-globs vss-extension.json --token $(SYSTEM_ACCESSTOKEN)
+          #  displayName: 'Publish Azure DevOps Extension'
+          #  env:
+          #    SYSTEM_ACCESSTOKEN: $(SYSTEM_ACCESSTOKEN)
